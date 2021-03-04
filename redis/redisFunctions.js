@@ -31,6 +31,7 @@ function doInsert(maxReg = 100000, db = 1, k = "t") {
 
 async function doScanAsync(cursor = '0', pattern, db = 1, count = '1000',) {
 	const found = []
+	console.time('doScanAsync')
 	do {
 		try {
 			await selectAsync(db)
@@ -41,8 +42,16 @@ async function doScanAsync(cursor = '0', pattern, db = 1, count = '1000',) {
 			console.log(e)
 		}
 	} while(cursor !== '0')
-
-	return found
+	console.log('\n')
+	console.log('************************doScanAsync TIME(ms)*******************************', '\n')
+	console.timeEnd('doScanAsync')
+	console.log('\n')
+	console.log('************************doScanAsync TIME(ms)*******************************')
+	return {
+		found: found,
+		count: found.length,
+		success: found.length > 0 ? true : false
+	}
 }
 
 function doScan(pattern, db = 1, count = '50') {

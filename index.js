@@ -5,16 +5,22 @@ const { doScanAsync, doScan, doInsert } = require('./redis/redisFunctions.js')
 /**
  * static void main args[]
  */
-
-
 async function main() {
-  let response = null
   try {
-    response = await doScanAsync('0',"*bfed*")
+    const { found, count, success } = await doScanAsync('0',"*bfed*")
+    if (success) {
+      return {
+        found,
+        count
+      }
+    } else {
+      return {
+        "msg": `found ${count} keys for this pattern`
+      }
+    }
   } catch(e) {
     console.error(e)
   }
-  return response
 }
 
 
