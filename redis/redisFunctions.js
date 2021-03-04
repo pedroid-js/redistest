@@ -29,7 +29,7 @@ function doInsert(maxReg = 100000, db = 1, k = "t") {
 	}
 }
 
-async function doScanAsync(cursor = '0', pattern, db = 1, count = '1000',) {
+async function doScanAsync(cursor = '0', pattern, db = 1, count = '1000') {
 	const found = []
 	console.time('doScanAsync')
 	do {
