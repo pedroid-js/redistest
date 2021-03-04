@@ -1,0 +1,3 @@
+# redistest
+
+TEST FOR REDIS SCAN WITH A LARGE DB
