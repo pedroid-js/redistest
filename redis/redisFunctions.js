@@ -43,10 +43,10 @@ async function doScanAsync(cursor = '0', pattern, db = 1, count = '1000') {
 		}
 	} while(cursor !== '0')
 	console.log('\n')
-	console.log('************************doScanAsync TIME(ms)*******************************', '\n')
+	console.log(`************************doScanAsync COUNT '${count}' TIME(ms)*******************************`, '\n')
 	console.timeEnd('doScanAsync')
 	console.log('\n')
-	console.log('************************doScanAsync TIME(ms)*******************************')
+	console.log(`************************doScanAsync COUNT '${count}' TIME(ms)*******************************`)
 	return {
 		found: found,
 		count: found.length,
