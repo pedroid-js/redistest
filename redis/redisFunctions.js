@@ -33,7 +33,8 @@ function doInsert(maxReg = 12000000, db = 1, k = "t") {
 async function doDbsizeAsync(db) {
 	let size = 0
 	try {
-		size = await dbsizeAsync(db)
+		await selectAsync(db)
+		size = await dbsizeAsync()
 	} catch (e) {
 		console.error(e)
 	}
