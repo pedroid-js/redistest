@@ -25,7 +25,7 @@ function doInsert(maxReg = 100000, db = 1, k = "t") {
 	}
 	if (maxReg <= 0) {
 		clearInterval(interval)
-		client.end()
+		client.quit()
 	}
 }
 
@@ -48,7 +48,7 @@ async function doScanAsync(pattern, db = 1, count = '1000') {
 	console.timeEnd('func:doScanAsync')
 	console.log('\n')
 	console.log(`************************doScanAsync COUNT '${count}' TIME(ms)*******************************`)
-	client.end()
+	client.quit()
 	return {
 		found: found,
 		count: found.length,
