@@ -9,18 +9,19 @@ const getAsync = promisify(client.get).bind(client)
 const setAsync = promisify(client.set).bind(client)
 const scanAsync = promisify(client.scan).bind(client)
 const selectAsync = promisify(client.select).bind(client)
-const { gchar } = require('../assets/js/utils')
+const dbsizeAsync = promisify(client.dbsize).bind(client)
+const { gchar, elapsed_time } = require('../assets/js/utils')
 
 let interval = null
 
-function doInsert(maxReg = 100000, db = 1, k = "t") {
+function doInsert(maxReg = 12000000, db = 1, k = "t") {
 	if (!interval) {
 		interval = setInterval(() => {
-			maxReg = maxReg - 3500
+			maxReg = maxReg - 10000
 			doInsert(maxReg, 1, gchar(12))
-		}, 5000)
+		}, 2500)
 	}
-	for (let i = 0; i < 3500; i++) {
+	for (let i = 0; i < 10000; i++) {
 		insertReg(db, `testKey-${i}-${k}-${v4()}`, `testValue-${i}-${k}-${v4()}`)
 	}
 	if (maxReg <= 0) {
@@ -29,10 +30,20 @@ function doInsert(maxReg = 100000, db = 1, k = "t") {
 	}
 }
 
-async function doScanAsync(pattern, db = 1, count = '1000') {
+async function doDbsizeAsync(db) {
+	let size = 0
+	try {
+		size = await dbsizeAsync(db)
+	} catch (e) {
+		console.error(e)
+	}
+	return size
+}
+
+async function doScanAsync(pattern, db = 1, count = '10000') {
 	const found = []
 	let cursor = '0'
-	console.time('func:doScanAsync')
+	let start = process.hrtime()
 	do {
 		try {
 			await selectAsync(db)
@@ -43,15 +54,11 @@ async function doScanAsync(pattern, db = 1, count = '1000') {
 			console.error(e)
 		}
 	} while(cursor !== '0')
-	console.log('\n')
-	console.log(`************************doScanAsync COUNT '${count}' TIME(ms)*******************************`, '\n')
-	console.timeEnd('func:doScanAsync')
-	console.log('\n')
-	console.log(`************************doScanAsync COUNT '${count}' TIME(ms)*******************************`)
 	client.quit()
 	return {
 		found: found,
 		count: found.length,
+		elapsed_time: elapsed_time(start, "doScanAsync"),
 		success: found.length > 0 ? true : false
 	}
 }
@@ -112,5 +119,6 @@ module.exports = {
 	doInsert,
 	doScan,
 	doScanAsync,
+	doDbsizeAsync,
 	bulkCSV
 }
