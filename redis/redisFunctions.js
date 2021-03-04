@@ -55,13 +55,16 @@ async function doScanAsync(pattern, db = 1, count = '10000') {
 			console.error(e)
 		}
 	} while(cursor !== '0')
-	client.quit()
 	return {
 		found: found,
 		count: found.length,
 		elapsed_time: elapsed_time(start, "doScanAsync"),
 		success: found.length > 0 ? true : false
 	}
+}
+
+function Stop() {
+	client.quit()
 }
 
 function doScan(pattern, db = 1, count = '50') {
@@ -121,5 +124,6 @@ module.exports = {
 	doScan,
 	doScanAsync,
 	doDbsizeAsync,
+	Stop,
 	bulkCSV
 }

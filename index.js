@@ -1,6 +1,6 @@
 'use strict';
 
-const { doScanAsync, doScan, doInsert, doDbsizeAsync } = require('./redis/redisFunctions.js')
+const { doScanAsync, doScan, doInsert, doDbsizeAsync, Stop } = require('./redis/redisFunctions.js')
 
 /**
  * static void main args[]
@@ -32,6 +32,7 @@ async function main() {
   const scanc25 = await scan()
   const scanc1000 = await scan('1000')
   const scanc10000 = await scan('10000')
+  Stop()
 
   return {
     dbsize,
