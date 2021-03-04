@@ -47,6 +47,7 @@ async function doScanAsync(cursor = '0', pattern, db = 1, count = '1000') {
 	console.timeEnd('doScanAsync')
 	console.log('\n')
 	console.log(`************************doScanAsync COUNT '${count}' TIME(ms)*******************************`)
+	client.end()
 	return {
 		found: found,
 		count: found.length,
