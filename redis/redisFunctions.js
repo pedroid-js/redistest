@@ -39,7 +39,7 @@ async function doScanAsync(cursor = '0', pattern, db = 1, count = '1000') {
 			cursor = reply[0]
 			found.push(...reply[1])
 		} catch(e) {
-			console.log(e)
+			console.error(e)
 		}
 	} while(cursor !== '0')
 	console.log('\n')
