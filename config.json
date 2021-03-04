@@ -1,0 +1,10 @@
+{
+	"REDIS": {
+		"DEFAULT": {
+			"HOST": "127.0.0.1",
+			"PORT": 6379,
+			"PASSWORD": "3xpl0it",
+			"DEBUG_MODE": true
+		}
+	}
+}

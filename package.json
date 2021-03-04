@@ -1,0 +1,18 @@
+{
+  "name": "exploitredis",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "csv-parser": "^3.0.0",
+    "redis": "^3.0.2",
+    "redis-stream": "^0.1.0",
+    "uuid": "^8.3.2"
+  }
+}
