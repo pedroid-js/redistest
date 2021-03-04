@@ -8,6 +8,7 @@ const { promisify } = require('util')
 const getAsync = promisify(client.get).bind(client)
 const setAsync = promisify(client.set).bind(client)
 const scanAsync = promisify(client.scan).bind(client)
+const selectAsync = promisify(client.select).bind(client)
 const { gchar } = require('../assets/js/utils')
 
 let interval = null
@@ -32,7 +33,7 @@ async function doScanAsync(cursor = '0', pattern, db = 1, count = '1000',) {
 	const found = []
 	do {
 		try {
-			await selectDB(db)
+			await selectAsync(db)
 			const reply = await scanAsync(cursor, 'MATCH', pattern, 'COUNT', count)
 			cursor = reply[0]
 			found.push(...reply[1])
@@ -72,13 +73,9 @@ function doScan(pattern, db = 1, count = '50') {
 	}
 }
 
-async function selectDB(db) {
-	return client.select(db)
-}
-
 async function insertReg(db, key, value) {
 	try {
-		await selectDB(db)
+		await selectAsync(db)
 		setAsync(key, value)
 	} catch(e) {
 		console.error(e)
