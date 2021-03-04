@@ -8,7 +8,13 @@ const { doScanAsync, doScan, doInsert } = require('./redis/redisFunctions.js')
 
 
 async function main() {
-  return doScanAsync('0',"*bfed*")
+  let response = null
+  try {
+    response = await doScanAsync('0',"*bfed*")
+  } catch(e) {
+    console.error(e)
+  }
+  return response
 }
 
 
