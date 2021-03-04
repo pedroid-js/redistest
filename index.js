@@ -1,6 +1,6 @@
 'use strict';
 
-const { doScanAsync, doScan, massiveInsert } = require('./redis/redisFunctions.js')
+const { doScanAsync, doScan, doInsert } = require('./redis/redisFunctions.js')
 
 /**
  * static void main args[]
