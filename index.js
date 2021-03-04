@@ -32,6 +32,6 @@ main().then((data) => {
 
 //console.log(doScan("*-*"))
 //doScan("*DClmedSJQcqZ*")
-//massiveInsert()
+//doInsert()
 // client.set('key', 'value', redis.print())
 // client.get('key', redis.print)
